@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http//xmlns.jcp.org/jsf/passthrough"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="/components/header.xhtml" />
+
+<h:body class="nav-md">
+	<p:growl id="test" life="2000" />
+
+	<div class="container body">
+		<div class="main_container">
+
+
+			<ui:include src="/components/sidebar.xhtml" />
+
+
+			<!-- page content -->
+
+			<div class="right_col">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3 style="text-align: center">
+								Tasket
+								<h:outputText value="e userave"
+									rendered="#{userBean.userDto.isMenaxher()}" />
+								<h:outputText value="e mia "
+									rendered="#{!userBean.userDto.isMenaxher()}" />
+
+							</h3>
+						</div>
+
+						<div class="title_right"></div>
+					</div>
+
+					<div class="clearfix"></div>
+
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+
+
+									<div class="row">
+
+										<h:form class="form-label-left input_mask" id="addTaskForm"
+											rendered="#{userBean.userDto.isMenaxher()}">
+
+
+											<div class="row">
+												<div
+													class="col-md-offset-2 col-md-4 col-sm-6 col-xs-12 form-group has-feedback">
+													<h:inputText class="form-control has-feedback-left"
+														value="#{taskBean.taskDto.emer}" pt:placeholder="Emri"
+														required="true"
+														requiredMessage="Emri nuk mund te lihet bosh"
+														validatorMessage="Emri duhet te kete vetem shkronja">
+														<f:validateRegex pattern="[a-zA-Z]+" />
+													</h:inputText>
+													<span class="fa fa-tasks form-control-feedback left"></span>
+												</div>
+
+												<div class="col-md-4 col-sm-6 col-xs-12 form-group">
+
+													<p:selectOneMenu value="#{taskBean.taskDto.userId}"
+														style="width:415px"
+														rendered="#{userBean.userDto.isMenaxher()}"
+														required="true"
+														requiredMessage="Duhet te zgjidhni nje punonjes per taskun">
+														<f:selectItem itemLabel="Emer Mbiemer" />
+														<f:selectItems value="#{userCrudBean.userDtoList}"
+															var="userDto" itemValue="#{userDto.id}"
+															itemLabel="#{userDto.fullName}" />
+													</p:selectOneMenu>
+
+
+
+												</div>
+											</div>
+
+											<div class="row">
+												<div
+													class=" col-md-offset-2 col-md-4 col-sm-6 col-xs-12 form-group">
+													<div class="input-group date" id="myDatepicker">
+														<h:inputText class="form-control"
+															value="#{taskBean.taskDto.dateNisje}"
+															pt:placeholder="Date Fillimi" required="true"
+															requiredMessage="Zgjidhni daten e fillimit" />
+														<span class="input-group-addon"> <span
+															class="glyphicon glyphicon-calendar"></span>
+														</span>
+													</div>
+												</div>
+
+												<div class="col-md-4 col-sm-6 col-xs-12 form-group">
+													<div class="input-group date" id="myDatepicker2">
+														<h:inputText class="form-control"
+															value="#{taskBean.taskDto.datePerfundimi}"
+															pt:placeholder="Date Perfundimi" required="true"
+															requiredMessage="Zgjidhni daten e perfundimit" />
+														<span class="input-group-addon"> <span
+															class="glyphicon glyphicon-calendar"></span>
+														</span>
+													</div>
+												</div>
+
+											</div>
+
+											<div class="row">
+												<div class="col-md-offset-2 col-md-8 col-sm-9 col-xs-12">
+													<h:inputTextarea class="form-control" rows="3"
+														value="#{taskBean.taskDto.pershkrim}"
+														pt:placeholder="Pershkrimi" required="true"
+														requiredMessage="Pershkrimi nuk mund te lihet bosh" />
+												</div>
+											</div>
+											<br></br>
+											<div class="row">
+												<div class="col-md-offset-8 col-md-4 col-sm-9 col-xs-12">
+													<button value="reset" class="btn btn-default" type="reset">Reset</button>
+													<p:commandButton value="Shto task"
+														styleClass="btn btn-success"
+														update="growl test addTaskForm"
+														action="#{taskBean.addTask}" />
+												</div>
+											</div>
+
+
+										</h:form>
+
+
+									</div>
+									<br></br>
+									<div class="row">
+										<h:form class="form-inline" id="searchForm">
+
+											<div class="form-group">
+												<label for="emer">Emer</label>
+												<h:inputText class="form-control"
+													value="#{taskBean.taskDto.emer}"
+													pt:placeholder="search emer" />
+											</div>
+											<div class="form-group">
+												<label> <h:outputText value="Useri"
+														rendered="#{userBean.userDto.isMenaxher()}" />
+												</label>
+											</div>
+											<div class="form-group">
+												<p:selectOneMenu value="#{taskBean.taskDto.userId}"
+													style="width:275px"
+													rendered="#{userBean.userDto.isMenaxher()}" required="true">
+													<f:selectItems value="#{userCrudBean.userDtoList}"
+														var="userDto" itemValue="#{userDto.id}"
+														itemLabel="#{userDto.fullName}" />
+												</p:selectOneMenu>
+
+											</div>
+											<div class="form-group"></div>
+
+
+											<h:commandButton value="Reset" class="btn btn-default"
+												action="home.xhtml?faces-redirect=true" />
+											<p:commandButton value="Kerko" styleClass="btn btn-primary"
+												update="growl test " action="#{taskBean.filterTaskByName()}" />
+
+										</h:form>
+
+										<p:dataTable var="taskDto" style="text-align:center"
+											id="growl" value="#{taskBean.taskDtoList}" widgetVar="DTWVar"
+											rows="10" paginator="true"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="10,20,50">
+
+											<p:column headerText="Nr">
+
+												<h:outputText value="#{taskDto.id}" />
+											</p:column>
+											<p:column headerText="Emri">
+												<h:outputText value="#{taskDto.emer}" />
+											</p:column>
+
+											<p:column headerText="Pershkrim">
+												<h:outputText value="#{taskDto.pershkrim}" />
+											</p:column>
+											<p:column headerText="Date Nisje">
+												<h:outputText value="#{taskDto.dateNisje}" />
+											</p:column>
+											<p:column headerText="Date Perfundimi">
+												<h:outputText value="#{taskDto.datePerfundimi}" />
+											</p:column>
+											<p:column headerText="E.Punonjes"
+												rendered="#{userBean.userDto.isMenaxher()}">
+												<h:outputText value="#{taskDto.emerPunonjes}" />
+											</p:column>
+											<p:column headerText="M.Punonjes"
+												rendered="#{userBean.userDto.isMenaxher()}">
+												<h:outputText value="#{taskDto.mbiemerPunonjes}" />
+											</p:column>
+											<p:column headerText="Gjendja e taskut"
+												rendered="#{!userBean.userDto.isMenaxher()}">
+												<h:form>
+													<p:selectOneMenu value="#{taskBean.taskDto.gjendjeId}"
+														required="true"
+														requiredMessage="Ju lutem zgjidhni nje gjendje per taskun tuaj">
+														<f:selectItem itemLabel="Zgjidh gjendjen" />
+														<f:selectItems value="#{gjendjeBean.gjendjeDtoList}"
+															var="gjendjeDto" itemValue="#{gjendjeDto.id}"
+															itemLabel="#{gjendjeDto.gjendje}" />
+
+													</p:selectOneMenu>
+													<p:commandButton value="Ndrysho Gjendje"
+														styleClass="btn btn-success" update="test"
+														action="#{gjendjeBean.updateGjendje(taskDto.id)}" />
+												</h:form>
+											</p:column>
+
+											<p:column headerText="Edito"
+												rendered="#{userBean.userDto.isMenaxher()}">
+												<h:commandButton value="Edito" type="button"
+													class="btn btn-primary fa fa-edit"
+													onclick="editTaskModal('#{taskDto.emer}','#{taskDto.pershkrim}','#{taskDto.dateNisje}','#{taskDto.datePerfundimi}','#{taskDto.id}','#{taskDto.gjendjeId}')" />
+
+											</p:column>
+
+											<p:column headerText="Fshi"
+												rendered="#{userBean.userDto.isMenaxher()}">
+												<h:form>
+
+
+
+													<p:commandButton value="Fshi" style="color:red"
+														actionListener="#{taskBean.deleteTask(taskDto.id)}"
+														update="growl test" oncomplete="PF('DTWVar').filter()">
+														<p:confirm header="konfirmim" message="Jeni i sigurte ?"
+															icon="ui-icon-alert" />
+													</p:commandButton>
+													<p:confirmDialog global="true" showEffect="fade"
+														hideEffect="fade">
+
+														<p:commandButton value="Po" type="button"
+															styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+														<p:commandButton value="Jo" type="button"
+															styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+
+													</p:confirmDialog>
+												</h:form>
+											</p:column>
+
+										</p:dataTable>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+
+			<div class="modal fade bs-example-modal-lg" tabindex="-1"
+				id="editTaskModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<h:commandButton type="button" class="close"
+								pt:data-dismiss="modal" value="x" />
+
+							<h4 class="modal-title" id="editTaskModal">Edito Task</h4>
+						</div>
+						<h:form class="form-horizontal form-label-left" id="editTask">
+
+							<div class="modal-body">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="last-name">Emri* </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+
+										<h:inputText class="form-control col-md-7 col-xs-12 modalName"
+											required="true" value="#{taskBean.taskDto.emer}"
+											requiredMessage="Emri nuk mund te lihet bosh"
+											validatorMessage="Emri duhet te kete vetem shkronja">
+											<f:validateRegex pattern="[a-zA-Z]+" />
+										</h:inputText>
+
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="last-name">Data e Fillimit* </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="input-group date" id="myDatepicker3">
+											<h:inputText value="#{taskBean.taskDto.dateNisje}"
+												class="form-control col-md-7 col-xs-12 modalStartDate"
+												required="true"
+												requiredMessage="Zgjidhni daten e fillimit te taskut">
+											</h:inputText>
+											<span class="input-group-addon"> <span
+												class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="last-name">Data e Perfundimit* </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<div class="input-group date" id="myDatepicker4">
+											<h:inputText
+												class="form-control col-md-7 col-xs-12 modalEndDate"
+												required="true" value="#{taskBean.taskDto.datePerfundimi}"
+												requiredMessage="Zgjidhni daten e perfundimit te taskut">
+											</h:inputText>
+											<span class="input-group-addon"> <span
+												class="glyphicon glyphicon-calendar"></span>
+											</span>
+										</div>
+									</div>
+								</div>
+
+
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="last-name">Punonjesi* </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<h:selectOneMenu class="form-control"
+											value="#{taskBean.taskDto.userId}" required="true"
+											requiredMessage="Duhet te zgjidhni nje punonjes per taskun">
+											<f:selectItems value="#{userCrudBean.userDtoList}"
+												var="userDto" itemValue="#{userDto.id}"
+												itemLabel="#{userDto.fullName}" />
+										</h:selectOneMenu>
+
+
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="last-name">Pershkrimi* </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+
+										<h:inputTextarea rows="3"
+											class="form-control col-md-7 col-xs-12 modalDescription"
+											required="true" value="#{taskBean.taskDto.pershkrim}"
+											requiredMessage="Pershkrimi nuk mund te lihet bosh" />
+
+
+
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<h:commandButton type="button" class="btn btn-default"
+									pt:data-dismiss="modal" value="Close" />
+								<h:inputHidden class="modalId" id="taskId"
+									value="#{taskBean.taskDto.id}" />
+								<h:inputHidden class="modalId" id="gjendjeId"
+									value="#{taskBean.taskDto.gjendjeId}" />
+								<p:commandButton styleClass="btn btn-default"
+									update="growl test" pt:data-dismiss="modal"
+									action="#{taskBean.editTask()}" ajax="true" value="Edito" />
+
+							</div>
+						</h:form>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+			<ui:include src="/components/changePassword.xhtml" />
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right"></div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!--<h:outputScript library="js" name="jquery.min.js" />-->
+
+	<ui:include src="/components/footer.xhtml" />
+
+</h:body>
+
+
+</html>

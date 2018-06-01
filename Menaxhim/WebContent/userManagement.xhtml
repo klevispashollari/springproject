@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html lang="" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http//xmlns.jcp.org/jsf/passthrough"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="/components/header.xhtml" />
+
+<h:body class="nav-md">
+	<p:growl id="test" life="2000" />
+	<div class="container body">
+		<div class="main_container">
+
+			<ui:include src="/components/sidebar.xhtml" />
+
+			<!-- page content -->
+
+			<div class="right_col">
+				<div class="">
+					<div class="page-title">
+						<div class="title_left">
+							<h3 style="text-align: center">Userat e kompanise</h3>
+						</div>
+
+						<div class="title_right"></div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="x_panel">
+								<div class="x_title">
+
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+
+
+
+									<h:form class="form-inline" id="krijoForm">
+
+
+										<div class="form-group">
+											<label>Emer*</label>
+											<h:inputText class="form-control"
+												value="#{userCrudBean.userDto.name}" pt:placeholder="klevis"
+												required="true"
+												requiredMessage="Emri nuk mund te lihet bosh"
+												validatorMessage="Emri duhet te kete vetem shkronja">
+												<f:validateRegex pattern="[a-zA-Z]+" />
+											</h:inputText>
+										</div>
+										<div class="form-group">
+											<label>Mbiemer*</label>
+											<h:inputText class="form-control"
+												value="#{userCrudBean.userDto.lastname}"
+												pt:placeholder="pashollari" required="true"
+												requiredMessage="Mbiemri nuk mund te lihet bosh"
+												validatorMessage="Mbiemri duhet te kete vetem shkronja">
+												<f:validateRegex pattern="[a-zA-Z]+" />
+											</h:inputText>
+
+
+										</div>
+										<div class="form-group">
+											<label>Email*</label>
+											<h:inputText class="form-control"
+												value="#{userCrudBean.userDto.email}"
+												pt:placeholder="klevispashollari@rocketmail.com"
+												required="true"
+												requiredMessage="Emaili nuk mund te lihet bosh"
+												validatorMessage="Emaili nuk eshte ne formatin e duhur">
+												<f:validateRegex
+													pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+											</h:inputText>
+										</div>
+										<div class="form-group">
+											<label>Password*</label>
+											<h:inputSecret class="form-control"
+												value="#{userCrudBean.userDto.password}"
+												pt:placeholder="**********" required="true"
+												requiredMessage="Passwordi nuk mund te lihet bosh"
+												validatorMessage="Passwordi duhet te kete te pakten 6 karaktere , nje shkronje , nje numer dhe nje karakter special">
+												<f:validateRegex
+													pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{6,20})" />
+											</h:inputSecret>
+										</div>
+										<button value="reset" class="btn btn-default" type="reset">Reset</button>
+										<p:commandButton value="Shto user"
+											update="growl test krijoForm" styleClass="btn btn-success"
+											action="#{userCrudBean.addUser()}">
+
+										</p:commandButton>
+									</h:form>
+									<p:dataTable var="userDto" value="#{userCrudBean.userDtoList}"
+										id="growl" style="text-align:center"
+										widgetVar="dataTableWidgetVar" rows="10" paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20,50">
+										<p:column headerText="Nr">
+											<h:outputText value="#{userDto.id}" />
+										</p:column>
+
+										<p:column headerText="Emri">
+											<h:outputText value="#{userDto.name}" />
+										</p:column>
+
+										<p:column headerText="Mbiemri">
+											<h:outputText value="#{userDto.lastname}" />
+										</p:column>
+
+										<p:column headerText="Emaili">
+											<h:outputText value="#{userDto.email}" />
+										</p:column>
+										<p:column headerText="Edito">
+											<h:commandButton value="Edito" type="button"
+												class="btn btn-primary fa fa-edit "
+												onclick="editModal('#{userDto.name}','#{userDto.lastname}','#{userDto.email}','#{userDto.id}')" />
+										</p:column>
+										<p:column headerText="Fshi">
+											<h:form>
+
+
+												<p:commandButton value="Fshi" style="color:red"
+													actionListener="#{userCrudBean.deleteUser(userDto.id)}"
+													update="growl test"
+													oncomplete="PF('dataTableWidgetVar').filter()">
+
+													<p:confirm header="konfirmim" message="Jeni i sigurte ?"
+														icon="ui-icon-alert" />
+												</p:commandButton>
+												<p:confirmDialog global="true" showEffect="fade"
+													hideEffect="fade">
+
+													<p:commandButton value="Po" type="button"
+														styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+													<p:commandButton value="Jo" type="button"
+														styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+
+												</p:confirmDialog>
+											</h:form>
+										</p:column>
+
+									</p:dataTable>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page content -->
+
+
+			<div class="modal fade bs-example-modal-lg" tabindex="-1"
+				id="editModal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<h:commandButton type="button" class="close"
+								pt:data-dismiss="modal" value="x" />
+
+							<h4 class="modal-title" id="myModalLabel">Edito User</h4>
+
+						</div>
+						<h:form class="form-horizontal form-label-left" id="editUser">
+							<div class="modal-body">
+
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="last-name">Emer* </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<h:inputText type="text"
+											class="form-control col-md-7 col-xs-12 modalEmri" id="emer"
+											required="true" value="#{userCrudBean.userDto.name}"
+											requiredMessage="emri nuk eshte vendosur"
+											validatorMessage="emri duhet te kete vetem shkronja">
+											<f:validateRegex pattern="[a-zA-Z]+" />
+										</h:inputText>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="last-name">Mbiemer* </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<h:inputText type="text"
+											class="form-control col-md-7 col-xs-12 modalMbiemri"
+											id="mbiemer" required="true"
+											value="#{userCrudBean.userDto.lastname}"
+											requiredMessage="mbiemri nuk eshte vendosur"
+											validatorMessage="mbiemri duhet te kete vetem shkronja">
+											<f:validateRegex pattern="[a-zA-Z]+" />
+										</h:inputText>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12"
+										for="last-name">Email* </label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<h:inputText type="text"
+											class="form-control col-md-7 col-xs-12 modalEmail" id="email"
+											required="true" value="#{userCrudBean.userDto.email}"
+											requiredMessage="emaili nuk eshte vendosur"
+											validatorMessage="emaili nuk eshte ne formatin e duhur">
+											<f:validateRegex
+												pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
+										</h:inputText>
+									</div>
+								</div>
+
+
+								<h:outputText id="emailModal" />
+
+
+
+							</div>
+							<div class="modal-footer">
+
+								<h:commandButton type="button" class="btn btn-default"
+									pt:data-dismiss="modal" value="Close" />
+								<h:inputHidden class="modalId" id="userId"
+									value="#{userCrudBean.userDto.id}" />
+								<p:commandButton styleClass="btn btn-default "
+									update="growl test" pt:data-dismiss="modal"
+									action="#{userCrudBean.editUser()}" ajax="true" value="Edito" />
+
+
+
+							</div>
+
+						</h:form>
+					</div>
+
+				</div>
+
+			</div>
+
+
+			<ui:include src="/components/changePassword.xhtml" />
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right"></div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
+		</div>
+	</div>
+
+	<!--<h:outputScript library="js" name="jquery.min.js" />-->
+
+	<ui:include src="/components/footer.xhtml" />
+
+</h:body>
+
+
+</html>
