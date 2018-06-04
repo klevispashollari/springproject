@@ -128,10 +128,8 @@
 											<div class="row">
 												<div class="col-md-offset-8 col-md-4 col-sm-9 col-xs-12">
 													<button value="reset" class="btn btn-default" type="reset">Reset</button>
-													<p:commandButton value="Shto task"
-														styleClass="btn btn-success"
-														update=":taskForm:taskTable test addTaskForm"
-														action="#{taskBean.addTask}" />
+													<h:commandButton value="Shto task"
+														styleClass="btn btn-success" action="#{taskBean.addTask}" />
 												</div>
 											</div>
 
@@ -206,7 +204,26 @@
 
 													</p:confirmDialog>
 												</p:commandButton>
-
+												<div class="row">
+													<div class="col-md-2">
+														<button type="button"
+															class="btn btn-default btn-circle btn-xs"
+															style="background-color: white"></button>
+														<label for="">Started</label>
+													</div>
+													<div class="col-md-2">
+														<button type="button"
+															class="btn btn-default btn-circle btn-xs"
+															style="background-color: #ffc080"></button>
+														<label for="">Working</label>
+													</div>
+													<div class="col-md-2">
+														<button type="button"
+															class="btn btn-default btn-circle btn-xs"
+															style="background-color: #bfffbf"></button>
+														<label for="">Finished</label>
+													</div>
+												</div>
 												<p:dataTable var="taskDto" id="taskTable" rowIndexVar="row"
 													style="text-align:center" value="#{taskBean.taskDtoList}"
 													widgetVar="DTWVar" selection="#{taskBean.selectedTask}"
@@ -277,32 +294,13 @@
 
 
 												</p:dataTable>
+
 											</h:form>
 
 										</div>
 
 									</div>
-									<br> </br>
-									<div class="row">
-										<div class="col-md-2">
-											<button type="button"
-												class="btn btn-default btn-circle btn-xs"
-												style="background-color: white"></button>
-											<label for="">Ne punim</label>
-										</div>
-										<div class="col-md-2">
-											<button type="button"
-												class="btn btn-default btn-circle btn-xs"
-												style="background-color: #ffc080"></button>
-											<label for="">Ne mes</label>
-										</div>
-										<div class="col-md-2">
-											<button type="button"
-												class="btn btn-default btn-circle btn-xs"
-												style="background-color: #bfffbf"></button>
-											<label for="">Perfunduar</label>
-										</div>
-									</div>
+								
 
 								</div>
 							</div>

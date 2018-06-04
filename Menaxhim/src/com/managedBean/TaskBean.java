@@ -104,7 +104,14 @@ public class TaskBean implements Serializable {
 				MessagesUtility.addMessage(bundle.getString("TASKS_DELETED"));
 			}
 		} else {
-			MessagesUtility.addMessage(bundle.getString("TASK_NOT_DELETED"));
+			if (getSelectedTask().size() == 0) {
+				MessagesUtility.addMessage(bundle
+						.getString("TASK_NOT_SELECTED"));
+			} else {
+				MessagesUtility
+						.addMessage(bundle.getString("TASK_NOT_DELETED"));
+			}
+
 		}
 
 		return null;
@@ -113,7 +120,6 @@ public class TaskBean implements Serializable {
 	public String editTask() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date dataSot = new Date();
-
 		if (Validate.validateDate(format.parse(taskDto.getDateNisje()),
 				format.parse(taskDto.getDatePerfundimi()), dataSot)) {
 			if (taskService.edit(taskDto)) {
@@ -123,6 +129,7 @@ public class TaskBean implements Serializable {
 		} else {
 			MessagesUtility.addMessage(bundle.getString("TASK_NOT_EDITED"));
 		}
+
 		return null;
 	}
 
