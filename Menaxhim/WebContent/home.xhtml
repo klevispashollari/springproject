@@ -29,9 +29,9 @@
 							<h3 style="text-align: center">
 								Tasket
 								<h:outputText value="e userave"
-									rendered="#{userBean.userDto.isMenaxher()}" />
+									rendered="#{userBean.userDto.menaxher}" />
 								<h:outputText value="e mia "
-									rendered="#{!userBean.userDto.isMenaxher()}" />
+									rendered="#{!userBean.userDto.menaxher}" />
 
 							</h3>
 						</div>
@@ -55,7 +55,7 @@
 									<div class="row">
 
 										<h:form class="form-label-left input_mask" id="addTaskForm"
-											rendered="#{userBean.userDto.isMenaxher()}">
+											rendered="#{userBean.userDto.menaxher}">
 
 
 											<div class="row">
@@ -75,8 +75,7 @@
 
 													<p:selectOneMenu value="#{taskBean.taskDto.userId}"
 														style="width:415px"
-														rendered="#{userBean.userDto.isMenaxher()}"
-														required="true"
+														rendered="#{userBean.userDto.menaxher}" required="true"
 														requiredMessage="Duhet te zgjidhni nje punonjes per taskun">
 														<f:selectItem itemLabel="Emer Mbiemer" />
 														<f:selectItems value="#{userCrudBean.userDtoList}"
@@ -131,7 +130,7 @@
 													<button value="reset" class="btn btn-default" type="reset">Reset</button>
 													<p:commandButton value="Shto task"
 														styleClass="btn btn-success"
-														update="growl test addTaskForm"
+														update=":taskForm:taskTable test addTaskForm"
 														action="#{taskBean.addTask}" />
 												</div>
 											</div>
@@ -145,106 +144,58 @@
 									<div class="row">
 										<h:form class="form-inline" id="searchForm">
 
-											<div class="form-group">
-												<label for="emer">Emer</label>
-												<h:inputText class="form-control"
-													value="#{taskBean.taskDto.emer}"
-													pt:placeholder="search emer" />
+											<div class="col-md-2">
+												<div class="form-group">
+													<label for="emer">Emer</label>
+													<h:inputText class="form-control"
+														value="#{taskBean.taskDto.emer}"
+														pt:placeholder="search emer" />
+												</div>
 											</div>
-											<div class="form-group">
-												<label> <h:outputText value="Useri"
-														rendered="#{userBean.userDto.isMenaxher()}" />
-												</label>
+											<h:panelGroup layout="block" styleClass="col-md-3"
+												rendered="#{userBean.userDto.menaxher}">
+												<div class="form-group">
+													<label> <h:outputText value="Useri"
+															rendered="#{userBean.userDto.menaxher}" />
+													</label>
+													<p:selectOneMenu value="#{taskBean.taskDto.userId}"
+														style="width:275px"
+														rendered="#{userBean.userDto.menaxher}" required="true">
+														<f:selectItems value="#{userCrudBean.userDtoList}"
+															var="userDto" itemValue="#{userDto.id}"
+															itemLabel="#{userDto.fullName}" />
+													</p:selectOneMenu>
+
+												</div>
+											</h:panelGroup>
+
+											<div class="col-md-2">
+												<div class="form-group" style="margin-top: 22px;">
+													<h:commandButton value="Reset" class="btn btn-default"
+														action="home.xhtml?faces-redirect=true" />
+													<p:commandButton value="Kerko" styleClass="btn btn-primary"
+														update="test :taskForm:taskTable"
+														action="#{taskBean.filterTaskByName()}" />
+												</div>
 											</div>
-											<div class="form-group">
-												<p:selectOneMenu value="#{taskBean.taskDto.userId}"
-													style="width:275px"
-													rendered="#{userBean.userDto.isMenaxher()}" required="true">
-													<f:selectItems value="#{userCrudBean.userDtoList}"
-														var="userDto" itemValue="#{userDto.id}"
-														itemLabel="#{userDto.fullName}" />
-												</p:selectOneMenu>
 
-											</div>
-											<div class="form-group"></div>
-
-
-											<h:commandButton value="Reset" class="btn btn-default"
-												action="home.xhtml?faces-redirect=true" />
-											<p:commandButton value="Kerko" styleClass="btn btn-primary"
-												update="growl test " action="#{taskBean.filterTaskByName()}" />
 
 										</h:form>
-
-										<p:dataTable var="taskDto" style="text-align:center"
-											id="growl" value="#{taskBean.taskDtoList}" widgetVar="DTWVar"
-											rows="10" paginator="true"
-											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-											rowsPerPageTemplate="10,20,50">
-
-											<p:column headerText="Nr">
-
-												<h:outputText value="#{taskDto.id}" />
-											</p:column>
-											<p:column headerText="Emri">
-												<h:outputText value="#{taskDto.emer}" />
-											</p:column>
-
-											<p:column headerText="Pershkrim">
-												<h:outputText value="#{taskDto.pershkrim}" />
-											</p:column>
-											<p:column headerText="Date Nisje">
-												<h:outputText value="#{taskDto.dateNisje}" />
-											</p:column>
-											<p:column headerText="Date Perfundimi">
-												<h:outputText value="#{taskDto.datePerfundimi}" />
-											</p:column>
-											<p:column headerText="E.Punonjes"
-												rendered="#{userBean.userDto.isMenaxher()}">
-												<h:outputText value="#{taskDto.emerPunonjes}" />
-											</p:column>
-											<p:column headerText="M.Punonjes"
-												rendered="#{userBean.userDto.isMenaxher()}">
-												<h:outputText value="#{taskDto.mbiemerPunonjes}" />
-											</p:column>
-											<p:column headerText="Gjendja e taskut"
-												rendered="#{!userBean.userDto.isMenaxher()}">
-												<h:form>
-													<p:selectOneMenu value="#{taskBean.taskDto.gjendjeId}"
-														required="true"
-														requiredMessage="Ju lutem zgjidhni nje gjendje per taskun tuaj">
-														<f:selectItem itemLabel="Zgjidh gjendjen" />
-														<f:selectItems value="#{gjendjeBean.gjendjeDtoList}"
-															var="gjendjeDto" itemValue="#{gjendjeDto.id}"
-															itemLabel="#{gjendjeDto.gjendje}" />
-
-													</p:selectOneMenu>
-													<p:commandButton value="Ndrysho Gjendje"
-														styleClass="btn btn-success" update="test"
-														action="#{gjendjeBean.updateGjendje(taskDto.id)}" />
-												</h:form>
-											</p:column>
-
-											<p:column headerText="Edito"
-												rendered="#{userBean.userDto.isMenaxher()}">
-												<h:commandButton value="Edito" type="button"
-													class="btn btn-primary fa fa-edit"
-													onclick="editTaskModal('#{taskDto.emer}','#{taskDto.pershkrim}','#{taskDto.dateNisje}','#{taskDto.datePerfundimi}','#{taskDto.id}','#{taskDto.gjendjeId}')" />
-
-											</p:column>
-
-											<p:column headerText="Fshi"
-												rendered="#{userBean.userDto.isMenaxher()}">
-												<h:form>
+									</div>
+									<br></br>
 
 
 
-													<p:commandButton value="Fshi" style="color:red"
-														actionListener="#{taskBean.deleteTask(taskDto.id)}"
-														update="growl test" oncomplete="PF('DTWVar').filter()">
-														<p:confirm header="konfirmim" message="Jeni i sigurte ?"
-															icon="ui-icon-alert" />
-													</p:commandButton>
+									<div class="row">
+										<div class="col-md-12">
+											<h:form id="taskForm">
+												<p:commandButton value="Fshi taske" style="color:red"
+													actionListener="#{taskBean.deleteSelectedTasks}"
+													update=":taskForm:taskTable test"
+													oncomplete="PF('DTWVar').filter()"
+													rendered="#{userBean.userDto.menaxher}">
+													<p:confirm header="konfirmim" message="Jeni i sigurte ?"
+														icon="ui-icon-alert" />
 													<p:confirmDialog global="true" showEffect="fade"
 														hideEffect="fade">
 
@@ -254,11 +205,103 @@
 															styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 
 													</p:confirmDialog>
-												</h:form>
-											</p:column>
+												</p:commandButton>
 
-										</p:dataTable>
+												<p:dataTable var="taskDto" id="taskTable" rowIndexVar="row"
+													style="text-align:center" value="#{taskBean.taskDtoList}"
+													widgetVar="DTWVar" selection="#{taskBean.selectedTask}"
+													rowKey="#{taskDto.id}" rows="10" paginator="true"
+													rowStyleClass="#{taskDto.gjendjeId eq 1  ? 'punim' : null} #{taskDto.gjendjeId eq 3  ? 'perfundim' : null} #{taskDto.gjendjeId eq 2  ? 'mes' : null}"
+													paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+													rowsPerPageTemplate="10,20,50">
 
+
+													<p:column rendered="#{userBean.userDto.menaxher}"
+														selectionMode="multiple"
+														style="width:35px;text-align:center">
+													</p:column>
+													<p:column headerText="Nr">
+
+														<h:outputText value="#{row+1}" />
+													</p:column>
+													<p:column headerText="Emri">
+														<h:outputText value="#{taskDto.emer}" />
+													</p:column>
+
+													<p:column headerText="Pershkrim">
+														<h:outputText value="#{taskDto.pershkrim}" />
+													</p:column>
+													<p:column headerText="Date Nisje">
+														<h:outputText value="#{taskDto.dateNisje}" />
+													</p:column>
+													<p:column headerText="Date Perfundimi">
+														<h:outputText value="#{taskDto.datePerfundimi}" />
+													</p:column>
+													<p:column headerText="E.Punonjes"
+														rendered="#{userBean.userDto.menaxher}">
+														<h:outputText value="#{taskDto.emerPunonjes}" />
+													</p:column>
+													<p:column headerText="M.Punonjes"
+														rendered="#{userBean.userDto.menaxher}">
+														<h:outputText value="#{taskDto.mbiemerPunonjes}" />
+													</p:column>
+													<p:column headerText="Gjendja e taskut"
+														rendered="#{!userBean.userDto.menaxher}">
+														<h:form>
+															<p:selectOneMenu
+																value="#{taskBean.taskDto.gjendjeAndTaskId}"
+																required="true"
+																requiredMessage="Ju lutem zgjidhni nje gjendje per taskun tuaj">
+																<p:ajax event="change"
+																	oncomplete="PF('DTWVar').filter()" update="test"
+																	listener="#{gjendjeBean.updateGjendje}" />
+																<f:selectItem itemLabel="Zgjidh gjendjen" />
+																<f:selectItems value="#{gjendjeBean.gjendjeDtoList}"
+																	var="gjendjeDto"
+																	itemValue="#{gjendjeDto.id} #{taskDto.id} "
+																	itemLabel="#{gjendjeDto.gjendje}" />
+
+															</p:selectOneMenu>
+
+														</h:form>
+													</p:column>
+
+													<p:column headerText="Edito"
+														rendered="#{userBean.userDto.menaxher}">
+														<h:commandButton value="Edito" type="button"
+															class="btn btn-primary fa fa-edit"
+															onclick="editTaskModal('#{taskDto.emer}','#{taskDto.pershkrim}','#{taskDto.dateNisje}','#{taskDto.datePerfundimi}','#{taskDto.id}','#{taskDto.gjendjeId}')" />
+
+													</p:column>
+
+
+
+												</p:dataTable>
+											</h:form>
+
+										</div>
+
+									</div>
+									<br> </br>
+									<div class="row">
+										<div class="col-md-2">
+											<button type="button"
+												class="btn btn-default btn-circle btn-xs"
+												style="background-color: white"></button>
+											<label for="">Ne punim</label>
+										</div>
+										<div class="col-md-2">
+											<button type="button"
+												class="btn btn-default btn-circle btn-xs"
+												style="background-color: #ffc080"></button>
+											<label for="">Ne mes</label>
+										</div>
+										<div class="col-md-2">
+											<button type="button"
+												class="btn btn-default btn-circle btn-xs"
+												style="background-color: #bfffbf"></button>
+											<label for="">Perfunduar</label>
+										</div>
 									</div>
 
 								</div>
@@ -374,7 +417,7 @@
 								<h:inputHidden class="modalId" id="gjendjeId"
 									value="#{taskBean.taskDto.gjendjeId}" />
 								<p:commandButton styleClass="btn btn-default"
-									update="growl test" pt:data-dismiss="modal"
+									update=":taskForm:taskTable test" pt:data-dismiss="modal"
 									action="#{taskBean.editTask()}" ajax="true" value="Edito" />
 
 							</div>
@@ -400,7 +443,6 @@
 	<!--<h:outputScript library="js" name="jquery.min.js" />-->
 
 	<ui:include src="/components/footer.xhtml" />
-
 </h:body>
 
 

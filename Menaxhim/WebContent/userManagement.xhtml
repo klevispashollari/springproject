@@ -98,12 +98,12 @@
 										</p:commandButton>
 									</h:form>
 									<p:dataTable var="userDto" value="#{userCrudBean.userDtoList}"
-										id="growl" style="text-align:center"
+										id="growl" style="text-align:center" rowIndexVar="row"
 										widgetVar="dataTableWidgetVar" rows="10" paginator="true"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										rowsPerPageTemplate="10,20,50">
 										<p:column headerText="Nr">
-											<h:outputText value="#{userDto.id}" />
+											<h:outputText value="#{row+1}" />
 										</p:column>
 
 										<p:column headerText="Emri">

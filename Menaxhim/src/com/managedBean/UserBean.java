@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 import com.dtoModel.UserDto;
 import com.service.UserService;
 
-@ManagedBean
+@ManagedBean(name = "userBean")
 @SessionScoped
 public class UserBean implements Serializable {
 

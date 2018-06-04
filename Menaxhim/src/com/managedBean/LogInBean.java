@@ -13,7 +13,7 @@ import com.dtoModel.UserDto;
 import com.service.UserService;
 import com.utility.MessagesUtility;
 
-@ManagedBean
+@ManagedBean(name = "logInBean")
 @RequestScoped
 public class LogInBean implements Serializable {
 

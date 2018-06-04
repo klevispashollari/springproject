@@ -13,14 +13,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 
-import org.apache.log4j.Logger;
-
 import com.dtoModel.TaskDto;
 import com.service.TaskService;
 import com.service.UserService;
 import com.utility.MessagesUtility;
+import com.utility.Validate;
 
-@ManagedBean
+@ManagedBean(name = "taskBean")
 @ViewScoped
 public class TaskBean implements Serializable {
 
@@ -32,6 +31,7 @@ public class TaskBean implements Serializable {
 			.getBundle("com.Messages");
 	private TaskDto taskDto;
 	private ArrayList<TaskDto> taskDtoList;
+	private ArrayList<TaskDto> selectedTask;
 	@ManagedProperty(value = "#{taskService}")
 	private TaskService taskService;
 
@@ -81,14 +81,11 @@ public class TaskBean implements Serializable {
 	}
 
 	public String addTask() throws ParseException {
-		Logger log = Logger.getLogger(TaskBean.class);
-		log.info("adding ");
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date dataSot = new Date();
-		if (validateDate(format.parse(taskDto.getDateNisje()),
+		if (Validate.validateDate(format.parse(taskDto.getDateNisje()),
 				format.parse(taskDto.getDatePerfundimi()), dataSot)) {
 			if (taskService.add(taskDto)) {
-				log.info("sucess");
 				refreshBean();
 				MessagesUtility.addMessage(bundle.getString("TASK_ADDED"));
 			}
@@ -98,20 +95,26 @@ public class TaskBean implements Serializable {
 		return null;
 	}
 
-	public String deleteTask(int taskId) {
-		if (taskService.delete(taskId)) {
-			MessagesUtility.addMessage(bundle.getString("TASK_DELETED"));
+	public String deleteSelectedTasks() {
+
+		if (taskService.delete(getSelectedTask())) {
+			if (getSelectedTask().size() == 1) {
+				MessagesUtility.addMessage(bundle.getString("TASK_DELETED"));
+			} else {
+				MessagesUtility.addMessage(bundle.getString("TASKS_DELETED"));
+			}
 		} else {
 			MessagesUtility.addMessage(bundle.getString("TASK_NOT_DELETED"));
 		}
+
 		return null;
 	}
 
 	public String editTask() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date dataSot = new Date();
-		
-		if (validateDate(format.parse(taskDto.getDateNisje()),
+
+		if (Validate.validateDate(format.parse(taskDto.getDateNisje()),
 				format.parse(taskDto.getDatePerfundimi()), dataSot)) {
 			if (taskService.edit(taskDto)) {
 				refreshBean();
@@ -121,23 +124,6 @@ public class TaskBean implements Serializable {
 			MessagesUtility.addMessage(bundle.getString("TASK_NOT_EDITED"));
 		}
 		return null;
-	}
-
-	private boolean validateDate(Date dateNisje, Date datePerfundimi,
-			Date dataSot) {
-		if (dateNisje.compareTo(dataSot) < 0) {
-			MessagesUtility
-					.addMessage(bundle.getString("TASK_STARTDATE_ERROR"));
-			return false;
-		} else {
-			if (datePerfundimi.compareTo(dateNisje) < 0) {
-				MessagesUtility.addMessage(bundle
-						.getString("TASK_ENDDATE_ERROR"));
-				return false;
-			} else {
-				return true;
-			}
-		}
 	}
 
 	// GETTERS AND SETTERS
@@ -179,6 +165,14 @@ public class TaskBean implements Serializable {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+
+	public ArrayList<TaskDto> getSelectedTask() {
+		return selectedTask;
+	}
+
+	public void setSelectedTask(ArrayList<TaskDto> selectedTask) {
+		this.selectedTask = selectedTask;
 	}
 
 }

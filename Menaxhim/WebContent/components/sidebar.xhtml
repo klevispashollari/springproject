@@ -49,7 +49,7 @@
 						<li><h:outputLink
 								value="http://localhost:8080/Menaxhim/home.xhtml">
 								<i class="fa fa-home"></i> Shiko Taske </h:outputLink></li>
-						<li><h:outputLink rendered="#{userBean.userDto.isMenaxher()}"
+						<li><h:outputLink rendered="#{userBean.userDto.menaxher}"
 								value="http://localhost:8080/Menaxhim/userManagement.xhtml">
 								<i class="fa fa-home"></i> Shiko Userat </h:outputLink></li>
 					</ul>
@@ -80,17 +80,15 @@
 							class=" fa fa-angle-down"></span>
 					</a>
 						<ul class="dropdown-menu dropdown-usermenu pull-right">
-								<li>
-							<a href="#" data-toggle="modal" data-target="#editPassword">
-								Ndrysho Fjalekalimin </a></li>
-					<li><h:form>
-							<h:commandLink class="fa fa-sign-out pull-right" value="Log out"
-								action="#{logInBean.logOut()}" />
-						</h:form></li>
+							<li><a href="#" data-toggle="modal"
+								data-target="#editPassword"> Ndrysho Fjalekalimin </a></li>
+							<li><h:form>
+									<h:commandLink class="fa fa-sign-out pull-right"
+										value="Log out" action="#{logInBean.logOut()}" />
+								</h:form></li>
 
-				</ul>
-				</li>
-				<li class="dropdown"></li>
+						</ul></li>
+					<li class="dropdown"></li>
 				</ul>
 			</nav>
 		</div>

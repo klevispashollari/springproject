@@ -14,8 +14,9 @@ import org.jasypt.util.password.StrongPasswordEncryptor;
 import com.dtoModel.UserDto;
 import com.service.UserService;
 import com.utility.MessagesUtility;
+import com.utility.Validate;
 
-@ManagedBean
+@ManagedBean(name = "userCrudBean")
 @ViewScoped
 public class UserCrudBean implements Serializable {
 
@@ -94,34 +95,23 @@ public class UserCrudBean implements Serializable {
 
 	public String changePassword() {
 		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-		if (!passwordEncryptor.checkPassword(userDto.getPassword(), userBean
-				.getUserDto().getPassword())) {
-			MessagesUtility.addMessage(bundle
-					.getString("INCORRECT_OLD_PASSWORD"));
 
-		} else {
-			if (!userDto.getNewPassword().equals(userDto.getConfirmPassword())) {
-				MessagesUtility.addMessage(bundle
-						.getString("PASSWORD_NOT_CONFIRM"));
+		if (Validate.changePassword(userDto.getPassword(),
+				userDto.getNewPassword(), userDto.getConfirmPassword(),
+				userBean.getUserDto().getPassword())) {
+			userBean.getUserDto()
+					.setPassword(
+							passwordEncryptor.encryptPassword(userDto
+									.getNewPassword()));
 
+			if (userService.changePassword(userBean.getUserDto())) {
+				MessagesUtility
+						.addMessage(bundle.getString("PASSWORD_CHANGED"));
 			} else {
-
-				userBean.getUserDto().setPassword(
-						passwordEncryptor.encryptPassword(userDto
-								.getNewPassword()));
-
-				if (userService.changePassword(userBean.getUserDto())) {
-					MessagesUtility.addMessage(bundle
-							.getString("PASSWORD_CHANGED"));
-
-				} else {
-					MessagesUtility.addMessage(bundle
-							.getString("PASSWORD_NOT_CHANGED"));
-
-				}
+				MessagesUtility.addMessage(bundle
+						.getString("PASSWORD_NOT_CHANGED"));
 			}
 		}
-
 		return null;
 	}
 

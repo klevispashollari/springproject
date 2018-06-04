@@ -18,6 +18,7 @@ public class TaskDto implements Serializable {
 	private String mbiemerPunonjes;
 	private int userId;
 	private int gjendjeId;
+	private String gjendjeAndTaskId;
 
 	public int getId() {
 		return id;
@@ -89,6 +90,14 @@ public class TaskDto implements Serializable {
 
 	public void setGjendjeId(int gjendjeId) {
 		this.gjendjeId = gjendjeId;
+	}
+
+	public String getGjendjeAndTaskId() {
+		return gjendjeAndTaskId;
+	}
+
+	public void setGjendjeAndTaskId(String gjendjeAndTaskId) {
+		this.gjendjeAndTaskId = gjendjeAndTaskId;
 	}
 
 }

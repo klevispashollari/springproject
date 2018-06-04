@@ -17,8 +17,8 @@ public class UserDto implements Serializable {
 	private String password;
 	private String newPassword;
 	private String confirmPassword;
-	private String roli;
 	private String fullName;
+	private boolean menaxher;
 
 	public String getFullName() {
 		return fullName;
@@ -92,19 +92,17 @@ public class UserDto implements Serializable {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public boolean isMenaxher() {
+	public boolean getMenaxher() {
 		if (roliId == 1) {
-			return true;
+			menaxher = true;
+		} else {
+			menaxher = false;
 		}
-		return false;
+		return menaxher;
 	}
 
-	public String getRoli() {
-		if (roliId == 1) {
-			roli = "manager";
-		} else {
-			roli = "employee";
-		}
-		return roli;
+	public void setMenaxher(boolean menaxher) {
+		this.menaxher = menaxher;
 	}
+
 }

@@ -9,7 +9,7 @@ public interface TaskService {
 
 	public boolean edit(TaskDto taskDto);
 
-	public boolean delete(int taskId);
+	public boolean delete(ArrayList<TaskDto> taskId);
 
 	public TaskDto getTask(int taskId);
 

@@ -7,13 +7,14 @@ import java.util.ResourceBundle;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 
 import com.dtoModel.GjendjeDto;
 import com.service.GjendjeService;
 import com.utility.MessagesUtility;
 
-@ManagedBean
+@ManagedBean(name = "gjendjeBean")
 @ViewScoped
 public class GjendjeBean implements Serializable {
 
@@ -54,6 +55,27 @@ public class GjendjeBean implements Serializable {
 		}
 		refreshBean();
 		return "";
+	}
+
+	public void updateGjendje(final AjaxBehaviorEvent event) {
+		String output[] = taskBean.getTaskDto().getGjendjeAndTaskId()
+				.split(" ");
+		System.out.println(output[0]);
+		System.out.println(output[1]);
+		Integer taskId = Integer.valueOf(output[1]);
+		Integer gjendjeId = Integer.valueOf(output[0]);
+
+		System.out.println(taskBean.getTaskDto().getGjendjeId());
+
+		if (gjendjeService.updateGjendje(taskId, gjendjeId)) {
+			refreshBean();
+			MessagesUtility.addMessage(bundle.getString("TASK_STATUS_EDITED"));
+		} else {
+			MessagesUtility.addMessage(bundle
+					.getString("TASK_STATUS_NOT_EDITED"));
+		}
+		refreshBean();
+
 	}
 
 	public ArrayList<GjendjeDto> getGjendjeDtoList() {

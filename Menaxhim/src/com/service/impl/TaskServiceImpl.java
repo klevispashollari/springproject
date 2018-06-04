@@ -43,6 +43,19 @@ public class TaskServiceImpl implements TaskService, Serializable {
 	}
 
 	@Transactional
+	public boolean delete(ArrayList<TaskDto> tasksId) {
+		boolean control = false;
+		for (int i = 0; i < tasksId.size(); i++) {
+			control = taskDao.delete(tasksId.get(i).getId());
+		}
+		if (control) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Transactional
 	public TaskDto getTask(int taskId) {
 		return TaskConverter.toTaskDto(taskDao.getTask(taskId));
 	}

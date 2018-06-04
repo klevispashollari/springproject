@@ -42,7 +42,7 @@ public class UserFilter implements Filter {
 				.toString();
 
 		if (userDto != null) {
-			if (!userDto.isMenaxher()) {
+			if (!userDto.getMenaxher()) {
 				if ((currentPath.contains("login.xhtml") || currentPath
 						.contains("error403.xhtml")) && !allowed(currentPath))
 					res.sendRedirect("home.xhtml");
@@ -51,7 +51,7 @@ public class UserFilter implements Filter {
 					res.sendError(403);
 				// res.sendRedirect("error403.xhtml");
 
-			} else if (userDto.isMenaxher()) {
+			} else if (userDto.getMenaxher()) {
 				if ((currentPath.contains("login.xhtml") || currentPath
 						.contains("error403.xhtml")) && !allowed(currentPath))
 					res.sendRedirect("home.xhtml");

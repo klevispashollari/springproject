@@ -37,14 +37,9 @@ public class TaskConverter {
 		task.setStatus(1);
 		User user = new User();
 		user.setId(taskDto.getUserId());
-
-		// nese eshte admin
-		// if (user.getStatus() == 1) {
 		Gjendje gjendje = new Gjendje();
 		gjendje.setId(taskDto.getGjendjeId());
 		task.setGjendje(gjendje);
-		// u be
-		// }
 		task.setUser(user);
 
 		return task;
@@ -69,10 +64,7 @@ public class TaskConverter {
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
 		try {
-
 			Date dateFromString = format.parse(date);
-			System.out.println(date);
-			System.out.println(dateFromString);
 			return new java.sql.Timestamp(dateFromString.getTime());
 		} catch (Exception e) {
 			return null;
