@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.converter.TaskConverter;
 import com.dao.TaskDao;
-import com.dao.UserDao;
 import com.dtoModel.TaskDto;
 import com.entitete.Task;
 import com.service.TaskService;
@@ -24,8 +23,6 @@ public class TaskServiceImpl implements TaskService, Serializable {
 
 	@Autowired
 	private TaskDao taskDao;
-	@Autowired
-	private UserDao userDao;
 
 	@Transactional
 	public boolean add(TaskDto taskDto) {

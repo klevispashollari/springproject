@@ -2,7 +2,6 @@ package com.managedBean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -22,8 +21,6 @@ public class GjendjeBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public final static ResourceBundle bundle = ResourceBundle
-			.getBundle("com.Messages");
 
 	private ArrayList<GjendjeDto> gjendjeDtoList;
 	private GjendjeDto gjendjeDto;
@@ -48,13 +45,14 @@ public class GjendjeBean implements Serializable {
 	public String updateGjendje(int taskId) {
 		if (gjendjeService.updateGjendje(taskId, taskBean.getTaskDto()
 				.getGjendjeId())) {
-			MessagesUtility.addMessage(bundle.getString("TASK_STATUS_EDITED"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("TASK_STATUS_EDITED"));
 		} else {
-			MessagesUtility.addMessage(bundle
+			MessagesUtility.addMessage(MessagesUtility.bundle
 					.getString("TASK_STATUS_NOT_EDITED"));
 		}
 		refreshBean();
-		return "";
+		return null;
 	}
 
 	public void updateGjendje(final AjaxBehaviorEvent event) {
@@ -69,9 +67,10 @@ public class GjendjeBean implements Serializable {
 
 		if (gjendjeService.updateGjendje(taskId, gjendjeId)) {
 			refreshBean();
-			MessagesUtility.addMessage(bundle.getString("TASK_STATUS_EDITED"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("TASK_STATUS_EDITED"));
 		} else {
-			MessagesUtility.addMessage(bundle
+			MessagesUtility.addMessage(MessagesUtility.bundle
 					.getString("TASK_STATUS_NOT_EDITED"));
 		}
 		refreshBean();

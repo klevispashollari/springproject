@@ -1,7 +1,6 @@
 package com.managedBean;
 
 import java.io.Serializable;
-import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -22,8 +21,7 @@ public class LogInBean implements Serializable {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	public final static ResourceBundle bundle = ResourceBundle
-			.getBundle("com.Messages");
+
 	private String email;
 	private String password;
 
@@ -43,13 +41,14 @@ public class LogInBean implements Serializable {
 				userBean.setUserDto(userDto);
 				return "home.xhtml?faces-redirect=true";
 			} else {
-				MessagesUtility.addMessage(bundle
+				MessagesUtility.addMessage(MessagesUtility.bundle
 						.getString("INCORRECT_PASSWORD"));
-				return "";
+				return null;
 			}
 		} else {
-			MessagesUtility.addMessage(bundle.getString("INCORRECT_EMAIL"));
-			return "";
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("INCORRECT_EMAIL"));
+			return null;
 		}
 
 	}

@@ -20,7 +20,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "User")
-@DynamicUpdate
+@DynamicUpdate(value = true)
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;

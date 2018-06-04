@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService, Serializable {
 	@Autowired
 	private UserDao userDao;
 	@Autowired
-	TaskDao taskDao;
+	private TaskDao taskDao;
 
 	@Transactional
 	public boolean add(UserDto userDto) {

@@ -49,7 +49,6 @@ public class UserFilter implements Filter {
 				else if (currentPath.contains("userManagement.xhtml")
 						&& !allowed(currentPath))
 					res.sendError(403);
-				// res.sendRedirect("error403.xhtml");
 
 			} else if (userDto.getMenaxher()) {
 				if ((currentPath.contains("login.xhtml") || currentPath

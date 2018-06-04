@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:a="http//xmlns.jcp.org/jsf/passthrough"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html">
 
 <!-- 	<h:outputScript library="js" name="jquery.min.js" /> -->
 <h:outputScript library="js" name="moment.min.js" />
@@ -19,22 +14,5 @@
 <!-- Custom Theme Scripts -->
 <h:outputScript library="js" name="custom.min.js" />
 <h:outputScript library="js" name="myScripts.js" />
-<script>
-	$('#myDatepicker').datetimepicker({
-		format : 'MM/DD/YYYY HH:mm:ss'
-	});
-	$('#myDatepicker2').datetimepicker({
-		format : 'MM/DD/YYYY HH:mm:ss'
-	});
-	$('#myDatepicker3').datetimepicker({
-		format : 'MM/DD/YYYY HH:mm:ss'
-	});
-	$('#myDatepicker4').datetimepicker({
-		format : 'MM/DD/YYYY HH:mm:ss'
-	});
 
-	$('.reset').on('click', function() {
-		location.reload();
-	})
-</script>
 </html>

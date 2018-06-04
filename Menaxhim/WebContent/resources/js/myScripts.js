@@ -38,4 +38,20 @@ $('.btn-default').removeClass('ui-state-default');
 $('.btn-default').removeClass('ui-corner-all');
 $('.btn-default').removeClass('ui-button-text-only');
 
+$('#myDatepicker').datetimepicker({
+	format : 'MM/DD/YYYY HH:mm:ss'
+});
+$('#myDatepicker2').datetimepicker({
+	format : 'MM/DD/YYYY HH:mm:ss'
+});
+$('#myDatepicker3').datetimepicker({
+	format : 'MM/DD/YYYY HH:mm:ss'
+});
+$('#myDatepicker4').datetimepicker({
+	format : 'MM/DD/YYYY HH:mm:ss'
+});
+
+$('.reset').on('click', function() {
+	location.reload();
+});
 $('.date-picker').datetimepicker();

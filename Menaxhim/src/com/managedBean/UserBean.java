@@ -20,6 +20,7 @@ public class UserBean implements Serializable {
 
 	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
+
 	private UserDto userDto;
 
 	public void logOut() {

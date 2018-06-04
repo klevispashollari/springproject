@@ -45,6 +45,7 @@ public class UserDaoImpl implements UserDao {
 					.setParameter("lname", user.getLname())
 					.setParameter("email", user.getEmail())
 					.setParameter("id", user.getId()).executeUpdate();
+			
 			log.info("User edited!");
 			return true;
 		} catch (Exception e) {
@@ -62,7 +63,7 @@ public class UserDaoImpl implements UserDao {
 					.createQuery("update User set status=:status where id=:id")
 					.setParameter("status", 0).setParameter("id", userId)
 					.executeUpdate();
-		
+
 			log.info("User deleted!");
 			return true;
 

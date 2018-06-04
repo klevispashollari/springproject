@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -27,11 +26,10 @@ public class TaskBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public final static ResourceBundle bundle = ResourceBundle
-			.getBundle("com.Messages");
 	private TaskDto taskDto;
 	private ArrayList<TaskDto> taskDtoList;
 	private ArrayList<TaskDto> selectedTask;
+
 	@ManagedProperty(value = "#{taskService}")
 	private TaskService taskService;
 
@@ -72,10 +70,12 @@ public class TaskBean implements Serializable {
 					userBean.getUserDto().getId());
 		}
 		if (taskDtoList.size() == 0) {
-			MessagesUtility.addMessage(bundle.getString("SEARCH_FAIL"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("SEARCH_FAIL"));
 
 		} else {
-			MessagesUtility.addMessage(bundle.getString("SEARCH_SUCCESS"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("SEARCH_SUCCESS"));
 		}
 		return taskDtoList;
 	}
@@ -87,10 +87,12 @@ public class TaskBean implements Serializable {
 				format.parse(taskDto.getDatePerfundimi()), dataSot)) {
 			if (taskService.add(taskDto)) {
 				refreshBean();
-				MessagesUtility.addMessage(bundle.getString("TASK_ADDED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("TASK_ADDED"));
 			}
 		} else {
-			MessagesUtility.addMessage(bundle.getString("TASK_NOT_ADDED"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("TASK_NOT_ADDED"));
 		}
 		return null;
 	}
@@ -99,17 +101,19 @@ public class TaskBean implements Serializable {
 
 		if (taskService.delete(getSelectedTask())) {
 			if (getSelectedTask().size() == 1) {
-				MessagesUtility.addMessage(bundle.getString("TASK_DELETED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("TASK_DELETED"));
 			} else {
-				MessagesUtility.addMessage(bundle.getString("TASKS_DELETED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("TASKS_DELETED"));
 			}
 		} else {
 			if (getSelectedTask().size() == 0) {
-				MessagesUtility.addMessage(bundle
+				MessagesUtility.addMessage(MessagesUtility.bundle
 						.getString("TASK_NOT_SELECTED"));
 			} else {
-				MessagesUtility
-						.addMessage(bundle.getString("TASK_NOT_DELETED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("TASK_NOT_DELETED"));
 			}
 
 		}
@@ -124,10 +128,12 @@ public class TaskBean implements Serializable {
 				format.parse(taskDto.getDatePerfundimi()), dataSot)) {
 			if (taskService.edit(taskDto)) {
 				refreshBean();
-				MessagesUtility.addMessage(bundle.getString("TASK_EDITED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("TASK_EDITED"));
 			}
 		} else {
-			MessagesUtility.addMessage(bundle.getString("TASK_NOT_EDITED"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("TASK_NOT_EDITED"));
 		}
 
 		return null;

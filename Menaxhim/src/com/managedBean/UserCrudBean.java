@@ -2,7 +2,6 @@ package com.managedBean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -25,8 +24,6 @@ public class UserCrudBean implements Serializable {
 	 */
 
 	private static final long serialVersionUID = 1L;
-	public final static ResourceBundle bundle = ResourceBundle
-			.getBundle("com.Messages");
 	private UserDto userDto;
 	private ArrayList<UserDto> userDtoList;
 
@@ -51,21 +48,26 @@ public class UserCrudBean implements Serializable {
 		if (!userExists()) {
 			if (userService.add(userDto)) {
 				refreshBean();
-				MessagesUtility.addMessage(bundle.getString("USER_ADDED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("USER_ADDED"));
 			} else {
-				MessagesUtility.addMessage(bundle.getString("USER_NOT_ADDED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("USER_NOT_ADDED"));
 			}
 		} else {
-			MessagesUtility.addMessage(bundle.getString("EMAIL_EXISTS"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("EMAIL_EXISTS"));
 		}
 		return null;
 	}
 
 	public String deleteUser(int userId) {
 		if (userService.delete(userId)) {
-			MessagesUtility.addMessage(bundle.getString("USER_DELETED"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("USER_DELETED"));
 		} else {
-			MessagesUtility.addMessage(bundle.getString("USER_NOT_DELETED"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("USER_NOT_DELETED"));
 		}
 		return null;
 	}
@@ -77,12 +79,15 @@ public class UserCrudBean implements Serializable {
 
 			if (userService.edit(userDto)) {
 				refreshBean();
-				MessagesUtility.addMessage(bundle.getString("USER_EDITED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("USER_EDITED"));
 			} else {
-				MessagesUtility.addMessage(bundle.getString("USER_NOT_EDITED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("USER_NOT_EDITED"));
 			}
 		} else {
-			MessagesUtility.addMessage(bundle.getString("EMAIL_EXISTS"));
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("EMAIL_EXISTS"));
 		}
 		return null;
 	}
@@ -105,10 +110,10 @@ public class UserCrudBean implements Serializable {
 									.getNewPassword()));
 
 			if (userService.changePassword(userBean.getUserDto())) {
-				MessagesUtility
-						.addMessage(bundle.getString("PASSWORD_CHANGED"));
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("PASSWORD_CHANGED"));
 			} else {
-				MessagesUtility.addMessage(bundle
+				MessagesUtility.addMessage(MessagesUtility.bundle
 						.getString("PASSWORD_NOT_CHANGED"));
 			}
 		}
