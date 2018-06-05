@@ -1,6 +1,5 @@
 package com.entitete;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,9 +20,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Table(name = "User")
 @DynamicUpdate(value = true)
-public class User implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class User {
 
 	@Id
 	@Column(name = "id")

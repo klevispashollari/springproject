@@ -1,8 +1,6 @@
 package com.managedBean;
 
-import java.io.Serializable;
 import java.text.ParseException;
-//import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +10,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 
+import org.primefaces.context.RequestContext;
+
 import com.dtoModel.TaskDto;
 import com.service.TaskService;
 import com.service.UserService;
@@ -20,12 +20,8 @@ import com.utility.Validate;
 
 @ManagedBean(name = "taskBean")
 @ViewScoped
-public class TaskBean implements Serializable {
+public class TaskBean {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private TaskDto taskDto;
 	private ArrayList<TaskDto> taskDtoList;
 	private ArrayList<TaskDto> selectedTask;
@@ -135,7 +131,7 @@ public class TaskBean implements Serializable {
 			}
 
 		}
-
+		// RequestContext.getCurrentInstance().update("id_of_whatever_you_want");
 		return null;
 	}
 

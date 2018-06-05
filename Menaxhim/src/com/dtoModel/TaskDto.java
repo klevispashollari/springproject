@@ -1,13 +1,6 @@
 package com.dtoModel;
 
-import java.io.Serializable;
-
-public class TaskDto implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class TaskDto {
 
 	private int id;
 	private String dateNisje;

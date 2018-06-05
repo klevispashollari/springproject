@@ -13,7 +13,7 @@ import com.entitete.Gjendje;
 import com.service.GjendjeService;
 
 @Service("gjendjeService")
-public class GjendjeServiceImpl implements GjendjeService {
+class GjendjeServiceImpl implements GjendjeService {
 
 	@Autowired
 	GjendjeDao gjendjeDao;

@@ -14,7 +14,7 @@ import com.entitete.Task;
 
 @Repository(value = "TaskDao")
 @Scope("singleton")
-public class TaskDaoImpl implements TaskDao {
+class TaskDaoImpl implements TaskDao {
 
 	private static Logger log = Logger.getLogger(TaskDaoImpl.class);
 
@@ -180,4 +180,5 @@ public class TaskDaoImpl implements TaskDao {
 			return null;
 		}
 	}
+
 }

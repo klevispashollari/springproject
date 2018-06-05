@@ -24,4 +24,5 @@ public interface TaskDao {
 	public ArrayList<Task> filterTaskByGjendjeUser(String gjendje, int userId);
 
 	public ArrayList<Task> filterTaskByGjendjeAdmin(String gjendje);
+
 }

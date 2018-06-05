@@ -1,6 +1,6 @@
 package com.managedBean;
 
-import java.io.Serializable;
+
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,12 +11,9 @@ import com.service.UserService;
 
 @ManagedBean(name = "userBean")
 @SessionScoped
-public class UserBean implements Serializable {
+public class UserBean {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 
 	@ManagedProperty(value = "#{userService}")
 	private UserService userService;

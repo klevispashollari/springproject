@@ -1,6 +1,5 @@
 package com.managedBean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -15,12 +14,9 @@ import com.utility.MessagesUtility;
 
 @ManagedBean(name = "gjendjeBean")
 @ViewScoped
-public class GjendjeBean implements Serializable {
+public class GjendjeBean  {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 
 	private ArrayList<GjendjeDto> gjendjeDtoList;
 	private GjendjeDto gjendjeDto;

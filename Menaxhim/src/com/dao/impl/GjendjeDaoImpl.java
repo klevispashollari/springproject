@@ -14,7 +14,7 @@ import com.entitete.Gjendje;
 
 @Repository(value = "GjendjeDao")
 @Scope("singleton")
-public class GjendjeDaoImpl implements GjendjeDao {
+class GjendjeDaoImpl implements GjendjeDao {
 
 	private static Logger log = Logger.getLogger(GjendjeDaoImpl.class);
 

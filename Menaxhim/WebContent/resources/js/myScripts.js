@@ -9,6 +9,9 @@ var editModal = function(name, surname, email, id) {
 	$('#editUser\\:userId').val(id);
 	$('#editModal').modal('toggle');
 }
+var  editFshiTaskModal = function(){
+	$('#editFshiTask').modal('toggle');
+}
 
 var editTaskModal = function(name, description, startDate, endDate, id,
 		gjendjeId) {

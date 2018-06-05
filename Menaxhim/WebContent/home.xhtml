@@ -76,7 +76,7 @@
 														style="width:415px"
 														rendered="#{userBean.userDto.menaxher}" required="true"
 														requiredMessage="Duhet te zgjidhni nje punonjes per taskun">
-														<f:selectItem itemLabel="Emer Mbiemer" />
+														<f:selectItem itemLabel="Zgjidh punonjes" />
 														<f:selectItems value="#{userCrudBean.userDtoList}"
 															var="userDto" itemValue="#{userDto.id}"
 															itemLabel="#{userDto.fullName}" />
@@ -158,6 +158,7 @@
 													<p:selectOneMenu value="#{taskBean.taskDto.userId}"
 														style="width:275px"
 														rendered="#{userBean.userDto.menaxher}" required="true">
+														<f:selectItem itemLabel="Zgjidh punonjes" />
 														<f:selectItems value="#{userCrudBean.userDtoList}"
 															var="userDto" itemValue="#{userDto.id}"
 															itemLabel="#{userDto.fullName}" />
@@ -213,11 +214,14 @@
 											<h:form id="taskForm">
 												<p:commandButton value="Fshi taske" style="color:red"
 													actionListener="#{taskBean.deleteSelectedTasks}"
-													update=":taskForm:taskTable test"
 													oncomplete="PF('DTWVar').filter()"
+													update=":taskForm:taskTable test"
+													
 													rendered="#{userBean.userDto.menaxher}">
+
 													<p:confirm header="konfirmim" message="Jeni i sigurte ?"
 														icon="ui-icon-alert" />
+
 													<p:confirmDialog global="true" showEffect="fade"
 														hideEffect="fade">
 
@@ -225,10 +229,8 @@
 															styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 														<p:commandButton value="Jo" type="button"
 															styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-
 													</p:confirmDialog>
 												</p:commandButton>
-
 												<p:dataTable var="taskDto" id="taskTable" rowIndexVar="row"
 													style="text-align:center" value="#{taskBean.taskDtoList}"
 													widgetVar="DTWVar" selection="#{taskBean.selectedTask}"
@@ -282,7 +284,7 @@
 																	var="gjendjeDto"
 																	itemValue="#{gjendjeDto.id} #{taskDto.id} #{taskDto.gjendjeId} "
 																	itemLabel="#{gjendjeDto.gjendje}" />
-
+																														
 															</p:selectOneMenu>
 
 														</h:form>
@@ -314,6 +316,12 @@
 				</div>
 			</div>
 			<!-- /page content -->
+
+
+
+
+
+
 
 
 			<div class="modal fade bs-example-modal-lg" tabindex="-1"
@@ -388,6 +396,7 @@
 										<h:selectOneMenu class="form-control"
 											value="#{taskBean.taskDto.userId}" required="true"
 											requiredMessage="Duhet te zgjidhni nje punonjes per taskun">
+											<f:selectItem itemLabel="Zgjidh Punonjes" />
 											<f:selectItems value="#{userCrudBean.userDtoList}"
 												var="userDto" itemValue="#{userDto.id}"
 												itemLabel="#{userDto.fullName}" />

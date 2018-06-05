@@ -1,6 +1,6 @@
 package com.managedBean;
 
-import java.io.Serializable;
+
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -14,13 +14,9 @@ import com.utility.MessagesUtility;
 
 @ManagedBean(name = "logInBean")
 @RequestScoped
-public class LogInBean implements Serializable {
+public class LogInBean {
 
-	/**
-	 * 
-	 */
-
-	private static final long serialVersionUID = 1L;
+	
 
 	private String email;
 	private String password;

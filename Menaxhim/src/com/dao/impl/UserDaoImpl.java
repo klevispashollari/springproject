@@ -14,7 +14,7 @@ import com.entitete.User;
 
 @Repository(value = "UserDao")
 @Scope("singleton")
-public class UserDaoImpl implements UserDao {
+class UserDaoImpl implements UserDao {
 
 	private static Logger log = Logger.getLogger(UserDaoImpl.class);
 

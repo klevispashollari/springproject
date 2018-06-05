@@ -1,6 +1,6 @@
 package com.service.impl;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,9 @@ import com.entitete.Task;
 import com.service.TaskService;
 
 @Service("taskService")
-public class TaskServiceImpl implements TaskService, Serializable {
+class TaskServiceImpl implements TaskService {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
 
 	@Autowired
 	private TaskDao taskDao;

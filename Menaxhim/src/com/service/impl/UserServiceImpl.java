@@ -1,6 +1,6 @@
 package com.service.impl;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,9 @@ import com.entitete.User;
 import com.service.UserService;
 
 @Service("userService")
-public class UserServiceImpl implements UserService, Serializable {
+class UserServiceImpl implements UserService {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	private UserDao userDao;
 	@Autowired

@@ -1,6 +1,6 @@
 package com.managedBean;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -17,13 +17,9 @@ import com.utility.Validate;
 
 @ManagedBean(name = "userCrudBean")
 @ViewScoped
-public class UserCrudBean implements Serializable {
+public class UserCrudBean  {
 
-	/**
-	 * 
-	 */
 
-	private static final long serialVersionUID = 1L;
 	private UserDto userDto;
 	private ArrayList<UserDto> userDtoList;
 
