@@ -80,6 +80,24 @@ public class TaskBean implements Serializable {
 		return taskDtoList;
 	}
 
+	public ArrayList<TaskDto> filterTaskByGjendje(String gjendje) {
+		if (userBean.getUserDto().getRoliId() == 1) {
+			this.taskDtoList = taskService.filterTaskByGjendje(gjendje, null);
+		} else {
+			this.taskDtoList = taskService.filterTaskByGjendje(gjendje,
+					userBean.getUserDto().getId());
+		}
+		if (taskDtoList.size() == 0) {
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("SEARCH_GJENDJE_FAIL"));
+		} else {
+			MessagesUtility.addMessage(MessagesUtility.bundle
+					.getString("SEARCH_SUCCESS"));
+		}
+
+		return taskDtoList;
+	}
+
 	public String addTask() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		Date dataSot = new Date();

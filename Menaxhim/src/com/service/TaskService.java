@@ -19,4 +19,6 @@ public interface TaskService {
 
 	public ArrayList<TaskDto> filterTaskByName(String taskName, int userId);
 
+	public ArrayList<TaskDto> filterTaskByGjendje(String gjendje, Integer userId);
+
 }

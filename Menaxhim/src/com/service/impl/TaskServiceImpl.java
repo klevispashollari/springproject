@@ -96,4 +96,23 @@ public class TaskServiceImpl implements TaskService, Serializable {
 		return taskDtoForUserListFiltered;
 	}
 
+	@Transactional
+	public ArrayList<TaskDto> filterTaskByGjendje(String gjendje, Integer userId) {
+		ArrayList<TaskDto> taskDtoForGjendjeFiltered = new ArrayList<>();
+		ArrayList<Task> entityTaskForGjendjeFiltered = new ArrayList<>();
+		if (userId != null) {
+			entityTaskForGjendjeFiltered = taskDao.filterTaskByGjendjeUser(
+					gjendje, userId);
+		} else if (userId == null) {
+			entityTaskForGjendjeFiltered = taskDao
+					.filterTaskByGjendjeAdmin(gjendje);
+		}
+		if (entityTaskForGjendjeFiltered != null) {
+			for (int i = 0; i < entityTaskForGjendjeFiltered.size(); i++) {
+				taskDtoForGjendjeFiltered.add(TaskConverter
+						.toTaskDto(entityTaskForGjendjeFiltered.get(i)));
+			}
+		}
+		return taskDtoForGjendjeFiltered;
+	}
 }

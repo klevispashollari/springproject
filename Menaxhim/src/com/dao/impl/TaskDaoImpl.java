@@ -141,7 +141,42 @@ public class TaskDaoImpl implements TaskDao {
 					.setParameter("userId", userId).setParameter("status", 1)
 					.getResultList();
 		} catch (Exception e) {
-			log.info("Filtering the tasks failed! Message " + e.getMessage());
+			log.error("Filtering the tasks failed! Message " + e.getMessage());
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<Task> filterTaskByGjendjeUser(String gjendje, int userId) {
+		try {
+			log.info("Filtering the tasks by gjendje!");
+			return (ArrayList<Task>) entityManager
+					.createQuery(
+							"select task from Task task where task.gjendje.gjendje=:gjendje and task.user.id=:userId and task.status=:status")
+					.setParameter("gjendje", gjendje)
+					.setParameter("userId", userId).setParameter("status", 1)
+					.getResultList();
+		} catch (Exception e) {
+			log.error("Filtering the tasks by gjendje for user failed! Message "
+					+ e.getMessage());
+			return null;
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<Task> filterTaskByGjendjeAdmin(String gjendje) {
+		try {
+			log.info("Filtering the tasks by gjendje!");
+			return (ArrayList<Task>) entityManager
+					.createQuery(
+							"select task from Task task where task.gjendje.gjendje=:gjendje  and task.status=:status")
+					.setParameter("gjendje", gjendje).setParameter("status", 1)
+					.getResultList();
+		} catch (Exception e) {
+			log.error("Filtering the tasks by gjendje for admin failed! Message "
+					+ e.getMessage());
 			return null;
 		}
 	}

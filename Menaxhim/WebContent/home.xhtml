@@ -182,7 +182,32 @@
 									<br></br>
 
 
+									<h:form>
+										<div class="row">
+											<div class="col-md-2">
+												<h:commandButton
+													action="#{taskBean.filterTaskByGjendje('Started')}"
+													class="btn btn-default btn-circle btn-xs"
+													style="background-color: white" />
 
+												<label for="">Started</label>
+											</div>
+											<div class="col-md-2">
+
+												<h:commandButton
+													action="#{taskBean.filterTaskByGjendje('Working')}"
+													class="btn btn-default btn-circle btn-xs"
+													style="background-color: #ffc080"></h:commandButton>
+												<label for="">Working</label>
+											</div>
+											<div class="col-md-2">
+												<h:commandButton class="btn btn-default btn-circle btn-xs"
+													style="background-color: #bfffbf"
+													action="#{taskBean.filterTaskByGjendje('Finished')}" />
+												<label for="">Finished</label>
+											</div>
+										</div>
+									</h:form>
 									<div class="row">
 										<div class="col-md-12">
 											<h:form id="taskForm">
@@ -203,26 +228,7 @@
 
 													</p:confirmDialog>
 												</p:commandButton>
-												<div class="row">
-													<div class="col-md-2">
-														<button type="button"
-															class="btn btn-default btn-circle btn-xs"
-															style="background-color: white"></button>
-														<label for="">Started</label>
-													</div>
-													<div class="col-md-2">
-														<button type="button"
-															class="btn btn-default btn-circle btn-xs"
-															style="background-color: #ffc080"></button>
-														<label for="">Working</label>
-													</div>
-													<div class="col-md-2">
-														<button type="button"
-															class="btn btn-default btn-circle btn-xs"
-															style="background-color: #bfffbf"></button>
-														<label for="">Finished</label>
-													</div>
-												</div>
+
 												<p:dataTable var="taskDto" id="taskTable" rowIndexVar="row"
 													style="text-align:center" value="#{taskBean.taskDtoList}"
 													widgetVar="DTWVar" selection="#{taskBean.selectedTask}"
@@ -274,7 +280,7 @@
 																<f:selectItem itemLabel="Zgjidh gjendjen" />
 																<f:selectItems value="#{gjendjeBean.gjendjeDtoList}"
 																	var="gjendjeDto"
-																	itemValue="#{gjendjeDto.id} #{taskDto.id} "
+																	itemValue="#{gjendjeDto.id} #{taskDto.id} #{taskDto.gjendjeId} "
 																	itemLabel="#{gjendjeDto.gjendje}" />
 
 															</p:selectOneMenu>

@@ -42,36 +42,28 @@ public class GjendjeBean implements Serializable {
 		this.gjendjeDtoList = gjendjeService.getAllGjendje();
 	}
 
-	public String updateGjendje(int taskId) {
-		if (gjendjeService.updateGjendje(taskId, taskBean.getTaskDto()
-				.getGjendjeId())) {
-			MessagesUtility.addMessage(MessagesUtility.bundle
-					.getString("TASK_STATUS_EDITED"));
-		} else {
-			MessagesUtility.addMessage(MessagesUtility.bundle
-					.getString("TASK_STATUS_NOT_EDITED"));
-		}
-		refreshBean();
-		return null;
-	}
-
 	public void updateGjendje(final AjaxBehaviorEvent event) {
 		String output[] = taskBean.getTaskDto().getGjendjeAndTaskId()
 				.split(" ");
-		System.out.println(output[0]);
-		System.out.println(output[1]);
 		Integer taskId = Integer.valueOf(output[1]);
 		Integer gjendjeId = Integer.valueOf(output[0]);
+		Integer oldGjendjeId = Integer.valueOf(output[2]);
 
-		System.out.println(taskBean.getTaskDto().getGjendjeId());
-
-		if (gjendjeService.updateGjendje(taskId, gjendjeId)) {
-			refreshBean();
+		if (gjendjeId > oldGjendjeId) {
+			if (gjendjeService.updateGjendje(taskId, gjendjeId)) {
+				refreshBean();
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("TASK_STATUS_EDITED"));
+			} else {
+				MessagesUtility.addMessage(MessagesUtility.bundle
+						.getString("TASK_STATUS_NOT_EDITED"));
+			}
+		} else if (gjendjeId == oldGjendjeId) {
 			MessagesUtility.addMessage(MessagesUtility.bundle
-					.getString("TASK_STATUS_EDITED"));
+					.getString("TASK_STATUS_SAME"));
 		} else {
 			MessagesUtility.addMessage(MessagesUtility.bundle
-					.getString("TASK_STATUS_NOT_EDITED"));
+					.getString("TASK_STATUS_OLD"));
 		}
 		refreshBean();
 
