@@ -11,8 +11,6 @@ public interface TaskService {
 
 	public boolean delete(ArrayList<TaskDto> taskId);
 
-	public TaskDto getTask(int taskId);
-
 	public ArrayList<TaskDto> getAllTask();
 
 	public ArrayList<TaskDto> getTaskForUser(int userId);

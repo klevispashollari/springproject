@@ -1,6 +1,5 @@
 package com.service.impl;
 
-
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,6 @@ import com.service.TaskService;
 @Service("taskService")
 class TaskServiceImpl implements TaskService {
 
-	
-
 	@Autowired
 	private TaskDao taskDao;
 
@@ -32,11 +29,6 @@ class TaskServiceImpl implements TaskService {
 	}
 
 	@Transactional
-	public boolean delete(int taskId) {
-		return taskDao.delete(taskId);
-	}
-
-	@Transactional
 	public boolean delete(ArrayList<TaskDto> tasksId) {
 		boolean control = false;
 		for (int i = 0; i < tasksId.size(); i++) {
@@ -47,11 +39,6 @@ class TaskServiceImpl implements TaskService {
 		} else {
 			return false;
 		}
-	}
-
-	@Transactional
-	public TaskDto getTask(int taskId) {
-		return TaskConverter.toTaskDto(taskDao.getTask(taskId));
 	}
 
 	@Transactional

@@ -80,22 +80,6 @@ class TaskDaoImpl implements TaskDao {
 		}
 	}
 
-	@Override
-	public Task getTask(int taskId) {
-		try {
-			log.info("Retrieving the task from id!");
-			return (Task) entityManager
-					.createQuery(
-							"select task from Task user where task.id=:taskId")
-					.setParameter("taskId", taskId).getSingleResult();
-
-		} catch (Exception e) {
-			log.error("Task failed to retrieve from id! Message "
-					+ e.getMessage());
-			return null;
-		}
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public ArrayList<Task> getAllTask() {

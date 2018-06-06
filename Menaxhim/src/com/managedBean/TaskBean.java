@@ -14,7 +14,6 @@ import org.primefaces.context.RequestContext;
 
 import com.dtoModel.TaskDto;
 import com.service.TaskService;
-import com.service.UserService;
 import com.utility.MessagesUtility;
 import com.utility.Validate;
 
@@ -31,9 +30,6 @@ public class TaskBean {
 
 	@ManagedProperty(value = "#{userBean}")
 	private UserBean userBean;
-
-	@ManagedProperty(value = "#{userService}")
-	private UserService userService;
 
 	@PostConstruct
 	public void init() {
@@ -184,14 +180,6 @@ public class TaskBean {
 
 	public void setUserBean(UserBean userBean) {
 		this.userBean = userBean;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
 	}
 
 	public ArrayList<TaskDto> getSelectedTask() {

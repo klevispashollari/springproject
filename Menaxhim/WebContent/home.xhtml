@@ -158,7 +158,7 @@
 													<p:selectOneMenu value="#{taskBean.taskDto.userId}"
 														style="width:275px"
 														rendered="#{userBean.userDto.menaxher}" required="true">
-														<f:selectItem itemLabel="Zgjidh punonjes" />
+														
 														<f:selectItems value="#{userCrudBean.userDtoList}"
 															var="userDto" itemValue="#{userDto.id}"
 															itemLabel="#{userDto.fullName}" />

@@ -13,8 +13,6 @@ public interface TaskDao {
 
 	public boolean deleteUserTasks(int userId);
 
-	public Task getTask(int taskId);
-
 	public ArrayList<Task> getAllTask();
 
 	public ArrayList<Task> getTaskForUser(int userId);

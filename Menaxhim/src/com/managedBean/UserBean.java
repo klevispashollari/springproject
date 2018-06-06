@@ -1,7 +1,5 @@
 package com.managedBean;
 
-
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -12,8 +10,6 @@ import com.service.UserService;
 @ManagedBean(name = "userBean")
 @SessionScoped
 public class UserBean {
-
-
 
 	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
