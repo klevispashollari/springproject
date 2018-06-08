@@ -14,9 +14,7 @@ import com.utility.MessagesUtility;
 
 @ManagedBean(name = "gjendjeBean")
 @ViewScoped
-public class GjendjeBean  {
-
-
+public class GjendjeBean {
 
 	private ArrayList<GjendjeDto> gjendjeDtoList;
 	private GjendjeDto gjendjeDto;

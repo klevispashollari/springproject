@@ -127,7 +127,7 @@ public class TaskBean {
 			}
 
 		}
-		// RequestContext.getCurrentInstance().update("id_of_whatever_you_want");
+		// RequestContext.getCurrentInstance().update("taskForm:taskTable");
 		return null;
 	}
 

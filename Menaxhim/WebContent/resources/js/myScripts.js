@@ -1,6 +1,9 @@
 var editPassword = function() {
 	$('#editPassword').modal('toggle');
 }
+var deleteTaskModal = function() {
+	$('#deleteTaskModal').modal('toggle');
+}
 
 var editModal = function(name, surname, email, id) {
 	$('.modalEmri').val(name);
@@ -9,7 +12,7 @@ var editModal = function(name, surname, email, id) {
 	$('#editUser\\:userId').val(id);
 	$('#editModal').modal('toggle');
 }
-var  editFshiTaskModal = function(){
+var editFshiTaskModal = function() {
 	$('#editFshiTask').modal('toggle');
 }
 
