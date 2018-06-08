@@ -1,0 +1,31 @@
+gjedje tasku nuk behet pas filtrimit
+
+
+1. gjeje ta kapesh si komponente me update se duhet bere, te fshirja(search apo shtim pas fshirjes)
+2. faces converters
+3. mund ta rruash querryn ne nje string builder dhe i ben append vetem pjeses se "where" ne varesi te si te duhet querry
+behet te controlleri dhe ne dao merret si parameter stringa e querit
+4. kur behet filtri nuk funksionon ndryshimi i gjendjes
+5. hiq logjiken nga beani coje ne service
+6. remove classat e primeface per dropdown menu te krijimi i taskut 
+7.Meso : kushti edit user(heq nje metode service [get user for id]) , userConverter , userFilter , exceptions
+annotations , application context , web.xml , faces-config
+
+(1 dhe 4)  kap id nga metoda e beanit
+searchi pas fshirjes , update te gjendjes (search pas oncomplete="filter")
+update i gjendjes pas searchit (eshte form brenda formes)
+
+		
+<p:commandButton value="Fshi taske" style="color:red"
+	actionListener="#{taskBean.deleteSelectedTasks}"													oncomplete="PF('DTWVar').filter()"
+	update=":taskForm:taskTable test"											
+	rendered="#{userBean.userDto.menaxher}">
+	<p:confirm header="konfirmim" message="Jeni i sigurte ?"
+	icon="ui-icon-alert" />
+	<p:confirmDialog global="true" showEffect="fade"
+	hideEffect="fade">
+	<p:commandButton value="Po" type="button"
+	styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+	<p:commandButton value="Jo" type="button"											styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	</p:confirmDialog>
+</p:commandButton>
