@@ -32,7 +32,6 @@ public class GjendjeBean {
 
 	public void refreshBean() {
 		this.gjendjeDto = new GjendjeDto();
-		this.gjendjeDtoList = new ArrayList<GjendjeDto>();
 		this.gjendjeDtoList = gjendjeService.getAllGjendje();
 	}
 
@@ -45,7 +44,6 @@ public class GjendjeBean {
 
 		if (gjendjeId > oldGjendjeId) {
 			if (gjendjeService.updateGjendje(taskId, gjendjeId)) {
-				refreshBean();
 				MessagesUtility.addMessage(MessagesUtility.bundle
 						.getString("TASK_STATUS_EDITED"));
 			} else {
@@ -59,7 +57,6 @@ public class GjendjeBean {
 			MessagesUtility.addMessage(MessagesUtility.bundle
 					.getString("TASK_STATUS_OLD"));
 		}
-		refreshBean();
 
 	}
 

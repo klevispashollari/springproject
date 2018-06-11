@@ -81,3 +81,16 @@
 	line-height: 1.428571429;
 	border-radius: 15px !important;
 }
+
+.form-control-prime {
+	width: 100% !important;
+}
+
+.form-control-prime {
+	display: block !important;
+	width: 100% !important;
+	border-radius: 0 !important;
+	color: #555 !important;
+	background-color: #fff !important;
+	background-image: none !important;
+}

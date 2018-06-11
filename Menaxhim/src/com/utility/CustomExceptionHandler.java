@@ -42,7 +42,6 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 			final NavigationHandler nav = fc.getApplication()
 					.getNavigationHandler();
 
-			// here you do what ever you want with exception
 			try {
 				// redirect error page
 				requestMap.put("exceptionMessage", t.getMessage());

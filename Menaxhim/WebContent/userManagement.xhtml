@@ -97,7 +97,7 @@
 										</h:commandButton>
 									</h:form>
 									<p:dataTable var="userDto" value="#{userCrudBean.userDtoList}"
-										id="growl" style="text-align:center" rowIndexVar="row"
+										id="table" style="text-align:center" rowIndexVar="row"
 										widgetVar="dataTableWidgetVar" rows="10" paginator="true"
 										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 										rowsPerPageTemplate="10,20,50">
@@ -127,7 +127,7 @@
 
 												<p:commandButton value="Fshi" style="color:red"
 													actionListener="#{userCrudBean.deleteUser(userDto.id)}"
-													update="growl test"
+													update="table test"
 													oncomplete="PF('dataTableWidgetVar').filter()">
 
 													<p:confirm header="konfirmim" message="Jeni i sigurte ?"
@@ -227,7 +227,7 @@
 								<h:inputHidden class="modalId" id="userId"
 									value="#{userCrudBean.userDto.id}" />
 								<p:commandButton styleClass="btn btn-default "
-									update="growl test" pt:data-dismiss="modal"
+									update="table test" pt:data-dismiss="modal"
 									action="#{userCrudBean.editUser()}" ajax="true" value="Edito" />
 
 

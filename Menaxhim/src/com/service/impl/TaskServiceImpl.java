@@ -33,6 +33,9 @@ class TaskServiceImpl implements TaskService {
 		boolean control = false;
 		for (int i = 0; i < tasksId.size(); i++) {
 			control = taskDao.delete(tasksId.get(i).getId());
+			if (!control) {
+				break;
+			}
 		}
 		if (control) {
 			return true;

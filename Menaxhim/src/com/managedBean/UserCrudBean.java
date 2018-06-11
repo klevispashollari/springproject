@@ -1,6 +1,5 @@
 package com.managedBean;
 
-
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
@@ -17,8 +16,7 @@ import com.utility.Validate;
 
 @ManagedBean(name = "userCrudBean")
 @ViewScoped
-public class UserCrudBean  {
-
+public class UserCrudBean {
 
 	private UserDto userDto;
 	private ArrayList<UserDto> userDtoList;
@@ -36,7 +34,6 @@ public class UserCrudBean  {
 
 	public void refreshBean() {
 		this.userDto = new UserDto();
-		this.userDtoList = new ArrayList<UserDto>();
 		this.userDtoList = userService.getAllUser();
 	}
 
@@ -65,6 +62,7 @@ public class UserCrudBean  {
 			MessagesUtility.addMessage(MessagesUtility.bundle
 					.getString("USER_NOT_DELETED"));
 		}
+		refreshBean();
 		return null;
 	}
 

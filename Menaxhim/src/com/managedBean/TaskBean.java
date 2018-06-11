@@ -10,8 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 
-import org.primefaces.context.RequestContext;
-
 import com.dtoModel.TaskDto;
 import com.service.TaskService;
 import com.utility.MessagesUtility;
@@ -38,7 +36,6 @@ public class TaskBean {
 
 	public void refreshBean() {
 		taskDto = new TaskDto();
-		taskDtoList = new ArrayList<TaskDto>();
 		this.taskDtoList = getTasks();
 	}
 
@@ -127,7 +124,7 @@ public class TaskBean {
 			}
 
 		}
-		// RequestContext.getCurrentInstance().update("taskForm:taskTable");
+		refreshBean();
 		return null;
 	}
 
